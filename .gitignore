@@ -1,0 +1,29 @@
+node_modules/
+dist/
+.env
+.env.local
+
+# Tauri
+src-tauri/target/
+src-tauri/gen/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# MCP server build artifacts
+mcp-server/dist/
+mcp-server/*.js
+
+# Local NCA index
+.nca/
+
+# Local DB/log artefacts
+*.db
+*.sqlite
+*.sqlite3
+*.log
+
+# Tauri build outputs
+src-tauri/target/
+src-tauri/gen/
