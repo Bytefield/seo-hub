@@ -1,0 +1,254 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Geist+Mono:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Design Tokens — Dark (default) ────────────────────────────────────── */
+:root {
+  --bg:        #06080b;
+  --bg2:       #090d12;
+  --s1:        #0d1318;
+  --s2:        #111920;
+  --s3:        #16202a;
+  --b1:        #1c2b38;
+  --b2:        #253647;
+  --b3:        #2f4459;
+
+  --accent:    #f97316;
+  --accent2:   #fb923c;
+  --adim:      rgba(249,115,22,0.12);
+  --aglow:     rgba(249,115,22,0.3);
+
+  --green:     #10d9a0;
+  --gdim:      rgba(16,217,160,0.12);
+  --red:       #f43f5e;
+  --rdim:      rgba(244,63,94,0.1);
+  --yellow:    #f59e0b;
+  --ydim:      rgba(245,158,11,0.12);
+  --blue:      #38bdf8;
+  --bdim:      rgba(56,189,248,0.1);
+  --purple:    #a78bfa;
+  --pdim:      rgba(167,139,250,0.1);
+
+  --t1:        #e4edf6;
+  --t2:        #a8c4d8;
+  --t3:        #6693b0;
+
+  --topbar-bg: rgba(9,13,18,0.95);
+
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-mono:    'Geist Mono', 'Courier New', monospace;
+  --font-ui:      'DM Sans', system-ui, sans-serif;
+
+  --r:  6px;
+  --rl: 12px;
+  --rxl: 20px;
+
+  /* UI scale — change this single value to resize all text */
+  --font-base: 16.5px;
+}
+
+/* ── Design Tokens — Light ──────────────────────────────────────────────── */
+html.light {
+  /* Page backgrounds */
+  --bg:        #e8edf3;
+  --bg2:       #dde4ed;
+
+  /* Card surfaces — clearly lifted from the page */
+  --s1:        #f7f9fb;
+  --s2:        #eef2f6;
+  --s3:        #e4eaf1;
+
+  /* Borders */
+  --b1:        #cdd8e3;
+  --b2:        #b8c8d8;
+  --b3:        #9ab0c4;
+
+  /* Semantic colour dims — more opaque so they read on light bg */
+  --adim:      rgba(249,115,22,0.14);
+  --gdim:      rgba(5,170,125,0.13);
+  --rdim:      rgba(220,38,70,0.1);
+  --ydim:      rgba(202,130,0,0.12);
+  --bdim:      rgba(14,150,210,0.11);
+  --pdim:      rgba(130,100,230,0.11);
+
+  /* Semantic colours slightly deeper for light bg legibility */
+  --green:     #05aa7d;
+  --red:       #dc2646;
+  --yellow:    #ca8200;
+  --blue:      #0e96d2;
+  --purple:    #7c5ce0;
+
+  /* Text */
+  --t1:        #0f1e2e;
+  --t2:        #2d4560;
+  --t3:        #5a7a96;
+
+  --topbar-bg: rgba(224,231,240,0.96);
+
+  /* Sidebar gets its own slightly darker surface in light mode */
+  --sidebar-bg: #f2f6fa;
+
+  color-scheme: light;
+}
+
+html:not(.light) {
+  --sidebar-bg: var(--s1);
+}
+
+/* ── Base ──────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  height: 100%;
+  font-size: var(--font-base);
+}
+
+body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--t1);
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden; /* Tauri window — no OS scrollbar */
+}
+
+#root { height: 100%; display: flex; flex-direction: column; }
+
+/* ── Scrollbar ─────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--s1); }
+::-webkit-scrollbar-thumb { background: var(--b2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--b3); }
+
+/* ── Typography ─────────────────────────────────────────────────────────── */
+.font-display { font-family: var(--font-display); }
+.font-mono    { font-family: var(--font-mono); }
+
+/* ── Grid background ────────────────────────────────────────────────────── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(28,43,56,0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(28,43,56,0.4) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+html.light .grid-bg {
+  background-image:
+    linear-gradient(rgba(100,140,180,0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(100,140,180,0.12) 1px, transparent 1px);
+}
+
+.grid-bg-fine {
+  background-image:
+    linear-gradient(rgba(28,43,56,0.25) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(28,43,56,0.25) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+html.light .grid-bg-fine {
+  background-image:
+    linear-gradient(rgba(100,140,180,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(100,140,180,0.08) 1px, transparent 1px);
+}
+
+/* ── Glow effects ───────────────────────────────────────────────────────── */
+.glow-accent { box-shadow: 0 0 20px var(--aglow); }
+.glow-green  { box-shadow: 0 0 16px rgba(16,217,160,0.25); }
+.text-glow   { text-shadow: 0 0 20px rgba(249,115,22,0.5); }
+
+/* ── Scanline overlay ───────────────────────────────────────────────────── */
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Noise texture ──────────────────────────────────────────────────────── */
+.noise::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Animations ─────────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes pulse-ring {
+  0%   { transform: scale(1);   opacity: 0.8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
+}
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to   { background-position: 200% 0; }
+}
+@keyframes score-fill {
+  from { stroke-dashoffset: 283; }
+}
+
+.anim-up   { animation: fadeUp   0.35s ease both; }
+.anim-in   { animation: fadeIn   0.25s ease both; }
+.anim-slide{ animation: slideRight 0.3s ease both; }
+
+.anim-d1 { animation-delay: 0.05s; }
+.anim-d2 { animation-delay: 0.10s; }
+.anim-d3 { animation-delay: 0.15s; }
+.anim-d4 { animation-delay: 0.20s; }
+.anim-d5 { animation-delay: 0.25s; }
+.anim-d6 { animation-delay: 0.30s; }
+
+/* ── Loading skeleton ───────────────────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--s2) 25%, var(--s3) 50%, var(--s2) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--r);
+}
+
+/* ── Score ring ─────────────────────────────────────────────────────────── */
+.score-ring circle {
+  animation: score-fill 1.2s ease forwards;
+}
+
+/* ── Drag region (Tauri titlebar) ──────────────────────────────────────── */
+.drag-region {
+  -webkit-app-region: drag;
+  app-region: drag;
+}
+.no-drag {
+  -webkit-app-region: no-drag;
+  app-region: no-drag;
+}
